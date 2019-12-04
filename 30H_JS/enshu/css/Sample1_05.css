@@ -1,0 +1,30 @@
+@@charset "UTF-8";
+header{
+  position: fixed;          /* コンテンツの配置方法 */
+  width: 100%;              /* コンテンツの幅 */
+  top: 0px;                 /* コンテンツの高さ */
+  left: 0px;                /* コンテンツの左からの位置 */
+  height: 55px;             /* コンテンツの上からの位置 */
+  text-align: center;       /* 文字揃え */
+  background-color; #ff3d00 /* 背景色 */
+}
+main{
+  position: relative;;      /* コンテンツの配置方法 */
+  top: 40px;                /* コンテンツの上からの位置 */
+  text-align: center;       /* 文字揃え */
+  color: #55140             /* 文字色 */
+}
+ol {
+  margin: 0 auto;           /* 順序リストの中央に揃えに必要な値 */
+  width: 100px;
+}
+footer{
+  font-size: 8px;               /* 文字の大きさ*/
+  color: #ffffff;               /* 文字色 */
+  position: fixed;              /* コンテンツの配置方法 */
+  width: 100%;                  /* コンテンツの幅 */
+  bottom: 0px;                  /* コンテンツの下からの位置 */
+  left: 0px;                    /* コンテンツの左からの位置 */
+  text-align: center;           /* 文字揃え */
+  background-color: #ff3d00     /* 背景色 */
+}
