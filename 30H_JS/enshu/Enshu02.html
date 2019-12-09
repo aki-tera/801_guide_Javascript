@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Enshu02</title>
+  </head>
+  <body>
+    <h2>凶が出ないおみくじ</h2>
+<script type="text/javascript">
+  let omikuji = Math.floor(Math.random() *4);         //0～3までの乱数を生成
+  let size = 10;                                      //フォントサイズを指定
+  let omikujiStr = "";                                 //おみくじの結果文字列  初期段階は不定
+  let omikujilabel = ["小吉", "中吉", "吉", "大吉"];
+  omikujiStr = omikujilabel[omikuji];
+  size = size * ( omikuji + 1 );
+  document.write('<div style="font-size:' + size + 'px;">' + omikujiStr + "</div>");
+</script>
+  </body>
+</html>
