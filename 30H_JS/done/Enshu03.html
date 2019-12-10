@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Enshu03</title>
+  </head>
+  <body>
+    <h2>凶が出ないおみくじ</h2>
+<script type="text/javascript">
+  let count = Number(window.prompt("何回おみくじを引く？"));
+  for( count; count > 0; count-- ){
+    let omikuji = Math.floor(Math.random() *4);         //0～3までの乱数を生成
+    let size = 10 * ( omikuji + 1 );                                      //フォントサイズを指定
+    let omikujiStr = "";                                 //おみくじの結果文字列  初期段階は不定
+    switch (omikuji) {
+      case 0:
+        omikujiStr = "小吉";
+        break;
+      case 1:
+        omikujiStr = "中吉";
+        break;
+      case 2:
+        omikujiStr = "吉";
+        break;
+      default:
+        omikujiStr = "大吉";
+        break;
+    }
+    document.write('<div style="font-size:' + size + 'px;">' + omikujiStr + "</div>");
+  }
+</script>
+  </body>
+</html>
