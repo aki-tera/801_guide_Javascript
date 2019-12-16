@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Enshu08</title>
+  </head>
+  <body>
+    <h2>30H JavaScript Menu</h2>
+    <p>
+      <a href="#" onclick="dispon('chap1')">1章</a>
+      <a href="#" onclick="dispon('chap2')">2章</a>
+      <a href="#" onclick="dispon('chap3')">3章</a>
+      <a href="#" onclick="dispoff()">非表示</a>
+    </p>
+    <p class="contents" id="chap1">1章 Webページの基本<br>
+      Web サーバーとクライアント・・・
+    </p>
+    <p class="contents" id="chap2">2章 javascriptの基本文法<br>
+      JavaScriptとは・・・
+    </p>
+    <p class="contents" id="chap3">3章 JavaScriptによるWeb ページ処理<br>
+      DOM操作・・・
+    </p>
+<script type="text/javascript">
+//表示と非表示の関数を分割した
+//非表示の関する
+  let dispoff = function(){
+    let contents = document.getElementsByClassName("contents");
+    for (let content of contents){
+      content.style.display="none";
+    }
+  }
+//表示の関数
+  let dispon = function(value){
+    dispoff();
+    let dispitem = document.getElementById(value);
+    dispitem.style.display = "block";
+  }
+//HTML読み込み直後に非表示する関数を実行する
+  window.onload = dispoff();
+</script>
+  </body>
+</html>
