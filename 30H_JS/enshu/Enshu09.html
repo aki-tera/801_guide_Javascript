@@ -34,11 +34,9 @@
       }
       document.getElementById("img1").style.left = imgLeft + "px";
       timerflag = false;
-      console.log(timerflag);
     } else {
       timerflag = true;
-      console.log(timerflag);
-      clearTimeout(timerID);
+      clearTimeout(timerID);       //これで連打防止をしている
     }
     timerID = setTimeout(timerstart, 50);
   }
