@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Enshu09</title>
+    <style type="text/css">
+#img1{
+  position: absolute;       /* 表示位置をページ左上から絶対的に指定する */
+  top:      100px;          /* うえから100ピクセルの位置に表示する */
+  left:     50px;           /* 左から50ピクセルの位置に表示する */
+  width:    100px;          /* 画像の表示幅を100ピクセルにする */
+  }
+    </style>
+  </head>
+  <body>
+    <h2>動くねこ先生</h2>
+    <input type="button" value="横移動" onclick="timerstart()">
+    <input type="button" value="停止" onclick="timerstop()">
+    <img src="images/yellow3.png" border="0" id="img1">
+<script type="text/javascript">
+  let imgLeft = 50;   //表示位置
+  let direct = 1;     //進行方向（正：右方向、負：左方向）
+  let timerflag = true;
+  let timerID = 0
+  function timerstart(){
+    if ( timerflag == true ){
+      imgLeft += 5 * direct;
+      if ( imgLeft > 200 ){
+        direct = -1;
+        imgLeft = 200;
+      } else if ( imgLeft < 0){
+        direct = 1;
+        imgLeft = 0;
+      }
+      document.getElementById("img1").style.left = imgLeft + "px";
+      timerflag = false;
+      console.log(timerflag);
+    } else {
+      timerflag = true;
+      console.log(timerflag);
+      clearTimeout(timerID);
+    }
+    timerID = setTimeout(timerstart, 50);
+  }
+  function timerstop(){
+    clearTimeout(timerID);
+    timerID = 0;
+  }
+</script>
+  </body>
+</html>
