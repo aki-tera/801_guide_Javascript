@@ -36,9 +36,9 @@
       timerflag = false;
     } else {
       timerflag = true;
-      clearTimeout(timerID);       //これで連打防止をしている
     }
-    timerID = setTimeout(timerstart, 50);
+    clearTimeout(timerID);       //これで連打防止をしている
+    timerID = setTimeout("timerstart()", 50);
   }
   function timerstop(){
     clearTimeout(timerID);
