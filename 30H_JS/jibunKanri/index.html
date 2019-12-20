@@ -13,6 +13,10 @@
         background-color: #661800;
         color:            #ffffff;
       }
+      #today{
+        font-weight: bold;
+        border: dotted 1px #333333;
+      }
     </style>
   </head>
 
@@ -27,6 +31,18 @@
     month = new Date().getMonth() + 1;
     makeCalendar(year, month);
   }
+
+  function initNext(){
+    month++;
+    if (month > 12){year++; month = 1;}
+    makeCalendar(year, month);
+  }
+
+  function initLast(){
+    month--;
+    if (month <= 0){year--; month = 12;}
+    makeCalendar(year, month);
+  }
 </script>
 
   <body onload="init();">
@@ -36,36 +52,14 @@
         <span id="headerMonth">1</span>月
       </div>
       <div class="navMenu">
-        <a href="#" id="todayBtn">今日</a>
-        <a href="#">＜</a>
-        <a href="#">＞</a>
+        <a href="javascript:init();" id="todayBtn">今日</a>
+        <a href="javascript:initLast();">＜</a>
+        <a href="javascript:initNext();">＞</a>
         <a href="#" id="configBtn">設定</a>
       </div>
     </header>
     <main>
-      <div id="calendar">
-        <table>
-          <tr>
-            <th id="sun">日</th>
-            <th id="mon">月</th>
-            <th id="tue">火</th>
-            <th id="wed">水</th>
-            <th id="thu">木</th>
-            <th id="fri">金</th>
-            <th id="sat">土</th>
-          </tr>
-          <script type="text/javascript">
-            //6×7マスのダミーカレンダーを作成
-            for (let i = 1; i < 7; i++){
-              document.write("<tr>");
-              for (let j = 1; j < 8; j++){
-                document.write("<td>" + (i * j) + "</td>");
-              }
-              document.write("</tr>");
-            }
-          </script>
-        </table>
-      </div>
+      <div id="calendar"></div>
       <div id="inputArea">
         <p id="selectInfo"></p>
         <select id="hour">
