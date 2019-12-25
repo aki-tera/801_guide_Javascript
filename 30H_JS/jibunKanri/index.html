@@ -17,10 +17,14 @@
         font-weight: bold;
         border: dotted 1px #333333;
       }
+      .holiday{
+        background-color: #f8aba6;
+      }
     </style>
   </head>
 
 <script type="text/javascript" src="./js/calendar.js"></script>
+<script type="text/javascript" src="./js/holiday.js"></script>
 <script type="text/javascript">
 
   let year = null;
@@ -30,18 +34,31 @@
     year = new Date().getFullYear();
     month = new Date().getMonth() + 1;
     makeCalendar(year, month);
+    showCalendar();
   }
 
   function initNext(){
     month++;
     if (month > 12){year++; month = 1;}
     makeCalendar(year, month);
+    showCalendar();
   }
 
   function initLast(){
     month--;
     if (month <= 0){year--; month = 12;}
     makeCalendar(year, month);
+    showCalendar();
+  }
+
+  function showCalendar(){
+    document.getElementById("calendar").style.display = "inline";
+    document.getElementById("inputArea").style.display = "none";
+  }
+
+  function showInputArea(){
+    document.getElementById("calendar").style.display = "none";
+    document.getElementById("inputArea").style.display = "inline";
   }
 </script>
 
