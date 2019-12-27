@@ -35,6 +35,8 @@
   function init(){
     year = new Date().getFullYear();
     month = new Date().getMonth() + 1;
+    setBackColor();
+    setFontColor();
     makeCalendar(year, month);
     showCalendar();
   }
