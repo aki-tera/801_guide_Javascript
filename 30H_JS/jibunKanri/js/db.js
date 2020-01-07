@@ -28,3 +28,87 @@ function initDB(){
     console.log("IndexedDBのオープンに失敗しました");
   };
 }
+
+//DBに値を登録する関数
+function setValue(){
+
+  //パラメータの設定
+  let day     = sessionStorage.getItem("day");
+  let hour    = document.getElementById("hour").value;
+  let minute  = document.getElementById("minute").value;
+  let memo    = document.getElementById("memo").value;
+  let idx     = String(year) + (("0" + month).slice(-2)) + (("0" + day)).slice(-2);
+  let key     = idx + hour + minute;
+
+  //確保：トランザクション
+  const transaction = db.transaction([DB_STORE], "readwrite");
+  //取得：オブジェクトストアー
+  const store = transaction.objectStore(DB_STORE);
+  //実行：リクエスト（put）
+  const request = store.put({
+    "yyyymmdd":     idx,
+    "yyymmddhhmm":  key,
+    "hour":         hour,
+    "minute":       minute,
+    "memo":         memo,
+    "date":         new Date()
+  });
+
+  //成功：リクエスト（put）
+  request.onsuccess = function(event){
+    //画面値のクリア
+    document.getElementById("hour").value   = "00";
+    document.getElementById("minute").value = "00";
+    document.getElementById("memo").value   = "";
+  }
+  //失敗：リクエスト（put）
+  request.onerror = function(event){
+    console.error(event.target.errorCode);
+  }
+
+  //データ再表示（リクエスト（put）の成功失敗に関わらず）
+  getDayDate();
+}
+
+//インデックスを用いて取得する関数
+function getDayDate(){
+
+  //パラメータの設定
+  let day = sessionStorage.getItem("day");
+  let idx = String(year) + (("0" + month).slice(-2)) + (("0" + day).slice(-2));
+
+  //結果出力個所のの初期化
+  const result = document.getElementById("result");
+  result.innerHTML = "";
+
+  //確保：トランザクション
+  const transaction = db.transaction([DB_STORE], "readonly");
+  //取得：オブジェクトストアー
+  const store = transaction.objectStore(DB_STORE);
+  //実行：リクエスト（openCursor）
+  const request = store.index("yyymmdd").openCursor(IDBKeyRange.only(idx));
+
+  //成功：リクエスト（openCursor）
+  request.onsuccess = function(event){
+    //これ以上結果がなければ終了
+    if (event.target.result == null) return;
+
+    //カーソルの取得
+    const cursor = event.target.result;
+    //カーソルから結果文字列を作成
+    let resultStr = "";
+    resultStr  = "<input class='deleteBtn' type='button' value='削除'";
+    resultStr += ">";
+    resultStr += "&nbsp;";
+    resultStr += cursor.value.hour + ":" + cursor.value.minute;
+    resultStr += "<p>" + cursor.value.memo + "</p><hr>";
+
+    result.innerHTML += resultStr;
+
+    cursor.continue();
+  }
+  //失敗：リクエスト（openCursor）
+  request.onerror = function(event){
+    console.error(event.target.errorCode);
+  }
+}

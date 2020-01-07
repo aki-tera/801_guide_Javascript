@@ -95,4 +95,9 @@ function selectDay(e){
   showInputArea();
   document.getElementById("selectInfo").innerHTML = "<h2>" + month + "月" + day + "日 （" + dayOfWeek + "）の予定</h2>";
 
+  //選択した日付をセッションストレージに格納
+  sessionStorage.setItem("day", day);
+
+  //選択した日付のデータ（同一インデックス）を表示
+  getDayDate();
 }
