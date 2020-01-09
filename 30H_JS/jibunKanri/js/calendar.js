@@ -3,13 +3,13 @@ function makeCalendar(year, month){
   //指定年月の最終日（1-31）を取得 （※月は0開始ではない）
   const monthDays = new Date(year, month, 0).getDate();
   //指定年月の最初の曜日（0-6）を取得
-  const firstDay = new Date(year, month -1, 1).getDay();
+  const firstDay = new Date(year, month - 1, 1).getDay();
   //指定年月の最後の曜日（0-6）を取得
   const lastDay = new Date(year, month - 1, monthDays).getDay();
   //最初の曜日を格納
   let dayOfWeek = firstDay;
 
-  //カレンダー出力用文字列の作成
+	//カレンダー出力用文字列の作成
   let str = " ";
   str += "<table>";
   str += "<tr>";
@@ -23,12 +23,12 @@ function makeCalendar(year, month){
   str += "</tr>";
   str += "<tr>";
 
-  //その月の第1日目が始まる曜日まで空白で埋める
+	//その月の第1日目が始まる曜日まで空白で埋める
   for (let i = 0; i < firstDay; i++){
     str += "<td>&nbsp;</td>";
   }
 
-  //その月の日数分ループ
+	//その月の日数分ループ
   for (let j = 1; j <= monthDays; j++){
     //週終わりの処理
     if ((firstDay + j) % 7 == 1){
@@ -48,7 +48,7 @@ function makeCalendar(year, month){
         && j      == new Date().getDate()
       )
       {
-        str += "  id='today'";
+        str += " id='today'";
       }
 
     //日曜または休日かどうか判断
@@ -99,5 +99,5 @@ function selectDay(e){
   sessionStorage.setItem("day", day);
 
   //選択した日付のデータ（同一インデックス）を表示
-  getDayDate();
+  getDayData();
 }

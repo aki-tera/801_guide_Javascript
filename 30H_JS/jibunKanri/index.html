@@ -39,15 +39,14 @@
     setBackColor();
     setFontColor();
     makeCalendar(year, month);
-    showCalendar();
-  }
+    showCalendar();  }
 
   function initNext(){
     month++;
     if (month > 12){year++; month = 1;}
     makeCalendar(year, month);
     showCalendar();
-  }
+    }
 
   function initLast(){
     month--;
@@ -95,7 +94,7 @@
         <select id="hour">
           <script type="text/javascript">
             //0～23時
-            for (var i = 0; i <= 23; i++){
+            for (let i = 0; i <= 23; i++){
               i = (i < 10) ? "0" + String(i) : i;
               document.write('<option value="' + i + '">' + i + '</option>');
             }

@@ -12,9 +12,9 @@ function initDB(){
   openRequest.onupgradeneeded = function(event){
     db = event.target.result;
     //作成：オプジェクトストアー
-    let store = db.createObjectStore(DB_STORE, {keyPath:"yyymmddhhmm"});
+    let store = db.createObjectStore(DB_STORE, {keyPath:"yyyymmddhhmm"});
     //作成：インデックス
-    store.createIndex("yyymmdd", "yyyymmdd", {unique:false});
+    store.createIndex("yyyymmdd", "yyyymmdd", {unique:false});
     console.log("IndexedDBの準備（新規作成／バージョン更新）が完了しました。");
   }
 
@@ -47,7 +47,7 @@ function setValue(){
   //実行：リクエスト（put）
   const request = store.put({
     "yyyymmdd":     idx,
-    "yyymmddhhmm":  key,
+    "yyyymmddhhmm": key,
     "hour":         hour,
     "minute":       minute,
     "memo":         memo,
@@ -67,11 +67,11 @@ function setValue(){
   }
 
   //データ再表示（リクエスト（put）の成功失敗に関わらず）
-  getDayDate();
+  getDayData();
 }
 
 //インデックスを用いて取得する関数
-function getDayDate(){
+function getDayData(){
 
   //パラメータの設定
   let day = sessionStorage.getItem("day");
@@ -86,7 +86,7 @@ function getDayDate(){
   //取得：オブジェクトストアー
   const store = transaction.objectStore(DB_STORE);
   //実行：リクエスト（openCursor）
-  const request = store.index("yyymmdd").openCursor(IDBKeyRange.only(idx));
+  const request = store.index("yyyymmdd").openCursor(IDBKeyRange.only(idx));
 
   //成功：リクエスト（openCursor）
   request.onsuccess = function(event){
