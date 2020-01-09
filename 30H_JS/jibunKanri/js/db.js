@@ -37,7 +37,7 @@ function setValue(){
   let hour    = document.getElementById("hour").value;
   let minute  = document.getElementById("minute").value;
   let memo    = document.getElementById("memo").value;
-  let idx     = String(year) + (("0" + month).slice(-2)) + (("0" + day)).slice(-2);
+  let idx     = String(year) + (("0" + month).slice(-2)) + (("0" + day).slice(-2));
   let key     = idx + hour + minute;
 
   //確保：トランザクション
