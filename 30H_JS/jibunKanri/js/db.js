@@ -135,3 +135,54 @@ function deleteValue(key){
     }
   }
 }
+
+//指定年月範囲のデータを削除
+function deleteMonthData(year, month){
+  if (confirm(year + "年" + month + "月のデータを削除します。よろしいですか？")){
+
+    //パラメータの設定
+    let lowerKey = String(year) + (("0" + month).slice(-2)) + "000000";
+    let upperKey = String(year) + (("0" + month).slice(-2)) + "999999";
+
+    //確保：トランザクション
+    const transaction = db.transaction([DB_STORE], "readwrite");
+    //取得：オブジェクトストアー
+    const store = transaction.objectStore(DB_STORE);
+    const request = store.delete(IDBKeyRange.bound(lowerKey, upperKey));
+
+    //成功：リクエスト（delete）
+    request.onsuccess = function(){
+      alert(year + "年" + month + "月のデータを削除しました。");
+    }
+    //失敗：リクエスト（delete）
+    request.onerror = function(){
+      console.error(event.target.errorCode);
+    }
+  }
+}
+
+
+//全てのデータを削除する関数
+function deleteAll(){
+  if (confirm("全てのデータを削除します。よろしいですか？")){
+
+    //確保：トランザクション
+    const transaction = db.transaction([DB_STORE], "readwrite");
+    //取得：オブジェクトストアー
+    const store = transaction.objectStore(DB_STORE);
+    //実行：リクエスト（clear）
+    const request = store.clear();
+
+    //成功：リクエスト（clear）
+    request.onsuccess = function(){
+      //ストレージもクリア
+      sessionStorage.clear();
+      localStorage.clear();
+      alert("全てのデータを削除しました。");
+    }
+    //失敗：リクエスト（clear）
+    request.onerror = function(event){
+      console.error(event.target.errorCode);
+    }
+  }
+}
